@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade'); // from
+            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->string('post_userid'); // to
             $table->timestamps();
         });
     }
