@@ -21,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view::composer('partials.sidebar', CategoryComposer::class);
+        view::composer(['partials.sidebar', 'lists.categories'], CategoryComposer::class);
     }
 }
