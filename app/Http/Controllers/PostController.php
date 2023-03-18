@@ -30,7 +30,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $title = "add new post";
+        return view('posts.create', compact('title'));
     }
 
     /**
@@ -38,7 +39,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . $file->getClientOriginalName();
+            $file->storeAs('public/images/', $filename);
+        }
+
+        $request->user()->posts()->create($request->all() + ['image_path' => $filename ?? 'default.jpg'] + ['slug' => $request->title]);
+
+        return back()->with('success', 'post added successfully.');
     }
 
     /**

@@ -25,7 +25,7 @@
                                     <i class="fa-regular fa-comment" style="font-size: 0.8em"></i> <span class="text-xs text-secondary">{{ $post->comments->count() }} Comments</span>
                                 </div>
                             </div>
-                            <h4 class="my-2 h4" ><a href="{{ route('post.show', $post->id)  }}">{{ $post->title }}</a></h4>
+                            <h4 class="my-2 h4" ><a href="{{ route('posts.show', $post->id)  }}">{{ $post->title }}</a></h4>
                             <p class="card-text mb-2">{!! Str::limit($post->body , 200) !!}</p>
                         </div>
                     </div>

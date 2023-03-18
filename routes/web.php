@@ -16,7 +16,7 @@ use App\Http\Controllers\PostController;
 
 
 Route::get('/', [PostController::class, 'index']);
-Route::resource('/post', PostController::class);
+Route::resource('/posts', PostController::class);
 Route::post('/search', [PostController::class, 'search'])->name('search');
 
 

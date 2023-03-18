@@ -39,6 +39,13 @@
             </form>
         </div>
         <ul class="navbar-nav mx-auto">
+
+            @auth
+                <li class="nav-item" style="list-style: none">
+                    <a class="nav-link" href="{{ route('posts.create') }}"><i class="fa fa-plus fa-fw"></i>Add new post</a>
+                </li>
+            @endauth
+
             <!-- Search Box -->
             <li style="list-style: none">
                 <form class="d-flex" method="post" action="{{ route('search') }}">
@@ -47,6 +54,14 @@
                     <button class="btn btn-sm btn-outline-light" type="submit">Go</button>
                 </form>
             </li>
+            @guest
+                <li class="nav-item" style="list-style: none">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
+                <li class="nav-item" style="list-style: none">
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+            @endguest
         </ul>
     </div>
 </nav>
