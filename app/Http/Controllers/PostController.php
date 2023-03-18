@@ -44,13 +44,15 @@ class PostController extends Controller
             'body' => 'required',
         ]);
 
+        $slug = str_replace(" ", "-", strtolower(trim($request->title)));
+
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . $file->getClientOriginalName();
             $file->storeAs('public/images/', $filename);
         }
 
-        $request->user()->posts()->create($request->all() + ['image_path' => $filename ?? 'default.jpg'] + ['slug' => $request->title]);
+        $request->user()->posts()->create($request->all() + ['image_path' => $filename ?? 'default.jpg'] + ['slug' => $slug]);
 
         return back()->with('success', 'post added successfully.');
     }
@@ -58,9 +60,9 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        $post = $this->post::where('id', $id)->first();
+        $post = $this->post::where('slug', $slug)->first();
         $comments = $post->comments->sortByDesc('created_at');
 
         return view('posts.show', compact('post', 'comments'));
