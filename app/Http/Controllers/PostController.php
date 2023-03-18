@@ -1,17 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
 
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+        $this->middleware('verified')->only('create');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = $this->post::with('user:id,name,profile_photo_path')->latest()->get();
+        $title = "All posts";
+        return view('index', compact('posts', 'title'));
     }
 
     /**
