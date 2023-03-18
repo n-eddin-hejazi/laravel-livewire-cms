@@ -38,5 +38,15 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
+        <ul class="navbar-nav mx-auto">
+            <!-- Search Box -->
+            <li style="list-style: none">
+                <form class="d-flex" method="post" action="{{ route('search') }}">
+                    @csrf
+                    <input class="form-control form-control-sm mx-2 rounded" name="keyword" type="search" placeholder="Search a post" aria-label="Search">
+                    <button class="btn btn-sm btn-outline-light" type="submit">Go</button>
+                </form>
+            </li>
+        </ul>
     </div>
 </nav>

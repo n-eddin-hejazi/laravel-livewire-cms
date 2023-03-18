@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->post::with('user:id,name,profile_photo_path')->approved()->paginate(1);
+        $posts = $this->post::with('user:id,name,profile_photo_path')->approved()->paginate(10);
         $title = "All posts";
         return view('index', compact('posts', 'title'));
     }
@@ -74,5 +74,12 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $posts = $this->post->where('body', 'LIKE', '%' . $request->keyword . '%')->with('user')->approved()->paginate(10);
+        $title = "Search results for: " . $request->keyword;
+        return view('index', compact('posts', 'title'));
     }
 }
