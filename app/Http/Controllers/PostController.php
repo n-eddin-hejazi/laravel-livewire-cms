@@ -46,7 +46,10 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = $this->post::where('id', $id)->first();
+        $comments = $post->comments->sortByDesc('created_at');
+
+        return view('posts.show', compact('post', 'comments'));
     }
 
     /**
