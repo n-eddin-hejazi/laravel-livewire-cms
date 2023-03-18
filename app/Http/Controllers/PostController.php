@@ -20,7 +20,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->post::with('user:id,name,profile_photo_path')->latest()->get();
+        //  $posts = $this->post::with('user:id,name,profile_photo_path')->approved()->paginate(10);
+        $posts = $this->post::with('user:id,name,profile_photo_path')->latest()->paginate(1);
         $title = "All posts";
         return view('index', compact('posts', 'title'));
     }
