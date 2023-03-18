@@ -18,6 +18,7 @@ use App\Http\Controllers\PostController;
 Route::get('/', [PostController::class, 'index']);
 Route::resource('/posts', PostController::class);
 Route::post('/search', [PostController::class, 'search'])->name('search');
+Route::get('/category/{id}/{slug}', [PostController::class, 'getByCategory'])->name('category');
 
 
 Route::middleware([

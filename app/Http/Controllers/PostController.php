@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Post;
-
+use App\Models\Category;
 use Illuminate\Http\Request;
-
 class PostController extends Controller
 {
     public $post;
@@ -96,6 +94,13 @@ class PostController extends Controller
     {
         $posts = $this->post->where('body', 'LIKE', '%' . $request->keyword . '%')->with('user')->approved()->paginate(10);
         $title = "Search results for: " . $request->keyword;
+        return view('index', compact('posts', 'title'));
+    }
+
+    public function getByCategory($id)
+    {
+        $posts = $this->post::with('user')->whereCategory_id($id)->approved()->paginate(10);
+        $title = "Posts belong to: " . Category::find($id)->title;
         return view('index', compact('posts', 'title'));
     }
 }

@@ -19,7 +19,7 @@
                                     <i class="far fa-clock" style="font-size: 0.8em"></i> <span class="text-xs text-secondary">{{ $post->created_at->diffForHumans() }}</span>
                                 </div>
                                 <div class="col-3">
-                                    <i class="fa-solid fa-align-justify" style="font-size: 0.8em"></i> <span class="text-secondary mt-4 text-xs">{{ $post->category->title }}</span>
+                                    <i class="fa-solid fa-align-justify" style="font-size: 0.8em"></i> <a href="{{ route('category', [$post->category->id, $post->category->slug]) }}"><span class="text-secondary mt-4 text-xs">{{ $post->category->title }}</span></a>
                                 </div>
                                 <div class="col-3">
                                     <i class="fa-regular fa-comment" style="font-size: 0.8em"></i> <span class="text-xs text-secondary">{{ $post->comments->count() }} Comments</span>
