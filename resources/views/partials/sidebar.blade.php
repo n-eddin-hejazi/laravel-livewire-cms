@@ -14,4 +14,20 @@
             </ul>
         </div>
     </div>
+
+    <!-- Side Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Last Comments</h5>
+        <ul class="list-group p-0">
+            @foreach($recent_comments as $comment)
+                <li class="list-group-item">
+                    <a href="{{ route('posts.show', $comment->Post->slug) }}#comments">
+                        <img style="float:left" src="{{$comment->user->profile_photo_url}}" width="40px" class="rounded-full"/>
+                        <span class="mt-1 me-1 ml-2 d-inline-block"><strong>{{$comment->user->name}}</strong></span>
+                        <span>{{\Illuminate\Support\Str::limit($comment->body, 60) }}</span>
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 </div>
