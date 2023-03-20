@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ Route::resource('/posts', PostController::class);
 Route::post('/search', [PostController::class, 'search'])->name('search');
 Route::get('/category/{id}/{slug}', [PostController::class, 'getByCategory'])->name('category');
 
+Route::resource('/comment', CommentController::class);
 
 Route::middleware([
     'auth:sanctum',
