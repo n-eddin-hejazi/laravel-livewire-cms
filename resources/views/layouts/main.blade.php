@@ -76,6 +76,9 @@
         <script src="https://kit.fontawesome.com/495c8a12a7.js" crossorigin="anonymous"></script>
         {{-- ckeditor --}}
         <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+         <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        
         @yield('script')
     </body>
 </html>
