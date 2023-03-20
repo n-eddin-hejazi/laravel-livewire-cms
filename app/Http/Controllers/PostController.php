@@ -103,4 +103,6 @@ class PostController extends Controller
         $title = "Posts belong to: " . Category::find($id)->title;
         return view('index', compact('posts', 'title'));
     }
+
+    
 }

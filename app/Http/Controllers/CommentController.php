@@ -82,4 +82,22 @@ class CommentController extends Controller
     {
         //
     }
+
+    public function replyStore(Request $request)
+    {
+        $this->validate($request, [
+            'comment_body' => 'required',
+        ]);
+
+        $reply = new Comment();
+        $reply->body = $request->get('comment_body');
+        $reply->user()->associate($request->user());
+        $reply->parent_id = $request->get('comment_id');
+        $reply->post_id = $request->get('post_id');
+        $post = Post::find($request->get('post_id'));
+
+        $post->comments()->save($reply);
+
+        return back()->with('success', 'تم إضافة الرد بنجاح');
+    }
 }
