@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
         {{-- end fonts --}}
+         <link href="{!! asset('theme/css/sb-admin-2.min.css') !!}" rel="stylesheet">
         <style>
             body{
                 font-family: 'Cairo', sans-serif;
@@ -93,7 +94,9 @@
                 alert(JSON.stringify(data));
             });
         </script>
-        
+
+        <script src="{!! asset('theme/js/sb-admin-2.min.js') !!}"></script>
+
         @yield('script')
     </body>
 </html>

@@ -6,11 +6,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item" style="list-style: none">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="list-style: none">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Pages
                     </a>
@@ -21,7 +21,7 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="list-style: none">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown
                     </a>
@@ -38,7 +38,29 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
-        <ul class="navbar-nav mx-auto">
+        <ul class="navbar-nav mx-auto align-items-center">
+            <div class="topbar" style="z-index:1">
+                @auth
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow alert-dropdown mx-1" style="list-style: none">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw fa-lg"></i>
+                            <!-- Counter - Alerts -->
+                            {{-- <span class="badge badge-danger badge-counter notif-count" data-count="{{ App\Models\Alert::where('user_id', Auth::user()->id)->first()->alert }}">{{ App\Models\Alert::where('user_id', Auth::user()->id)->first()->alert }}</span> --}}
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right text-right mt-2 mr-auto"
+                            aria-labelledby="alertsDropdown">
+                            <div class="alert-body">
+
+                            </div>
+                            {{-- {{ route('all.Notification') }} --}}
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show all notifications</a>
+                        </div>
+                    </li>
+                @endauth
+            </div>
 
             @auth
                 <li class="nav-item" style="list-style: none">
