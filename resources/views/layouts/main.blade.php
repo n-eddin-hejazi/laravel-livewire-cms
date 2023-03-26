@@ -78,6 +78,21 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
          <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        {{-- Pusher --}}
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
+        <script>
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+            var pusher = new Pusher('f45e04d680d39c09fe83', {
+                cluster: 'mt1'
+            });
+
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function(data) {
+                alert(JSON.stringify(data));
+            });
+        </script>
         
         @yield('script')
     </body>
