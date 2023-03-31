@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Events\CommentNotification;
 
 class CommentController extends Controller
 {
@@ -47,6 +48,15 @@ class CommentController extends Controller
         $post = Post::find($request->get('post_id'));
 
         $post->comments()->save($comment);
+
+
+        $data = [
+            'post_title' => $post->title,
+            'post' => $post,
+            'user_name' => $request->user()->name,
+            'user_image' => $request->user()->profile_photo_url
+        ];
+        event(new CommentNotification($data));
 
         return back()->with('success', 'Comment added successfully.');
     }

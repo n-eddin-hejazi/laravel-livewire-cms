@@ -47,7 +47,7 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw fa-lg"></i>
                             <!-- Counter - Alerts -->
-                            {{-- <span class="badge badge-danger badge-counter notif-count" data-count="{{ App\Models\Alert::where('user_id', Auth::user()->id)->first()->alert }}">{{ App\Models\Alert::where('user_id', Auth::user()->id)->first()->alert }}</span> --}}
+                            <span class="badge badge-danger badge-counter notif-count" data-count="0">0</span>
                         </a>
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right text-right mt-2 mr-auto"
