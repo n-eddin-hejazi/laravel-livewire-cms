@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Events\CommentNotification;
+use App\Models\Notification;
+use App\Models\Alert;
 
 class CommentController extends Controller
 {
@@ -49,6 +51,15 @@ class CommentController extends Controller
 
         $post->comments()->save($comment);
 
+        // Notification
+        $notification = new Notification();
+        if ($request->user()->id != $post->user_id) {
+            $notification->user_id = $request->user()->id;
+            $notification->post_id = $post->id;
+            $notification->post_userId = $post->user_id;
+            $notification->save();
+        }
+
 
         $data = [
             'post_title' => $post->title,
@@ -57,6 +68,13 @@ class CommentController extends Controller
             'user_image' => $request->user()->profile_photo_url
         ];
         event(new CommentNotification($data));
+
+        if ($request->user()->id != $post->user_id) {
+            $alert = Alert::where('user_id', $post->user_id)->first();
+
+            $alert->alert++;
+            $alert->save();
+        }
 
         return back()->with('success', 'Comment added successfully.');
     }

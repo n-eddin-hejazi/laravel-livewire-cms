@@ -129,6 +129,51 @@
         </script>
 
 
+
+        <script>
+            var token = '{{ Session::token() }}';
+            var urlNotify = '{{ route('notification') }}';
+            $('#alertsDropdown').on('click', function(event) {
+                event.preventDefault();
+                var notificationsWrapper = $('.alert-dropdown');
+                var notificationsToggle = notificationsWrapper.find('a[data-bs-toggle]');
+                var notificationsCountElem = notificationsToggle.find('span[data-count]');
+
+                notificationsCount = 0;
+                notificationsCountElem.attr('data-count', notificationsCount);
+                notificationsWrapper.find('.notif-count').text(notificationsCount);
+                notificationsWrapper.show();
+                $.ajax({
+                    method: 'POST',
+                    url: urlNotify,
+                    data: {
+                        _token: token
+                    },
+                    success : function(data) {
+                        var resposeNotifications = "";
+                        $.each(data.someNotifications , function(i, item) {
+                            var post_slug = "{{ route('posts.show', ':post_slug') }}";
+                            post_slug = post_slug.replace(':post_slug', item.post_slug);
+                            resposeNotifications += '<a class="dropdown-item d-flex align-items-center" href='+post_slug+'>\
+                                                        <div class="ml-3">\
+                                                            <div">\
+                                                                <img style="float:right" src='+item.user_image+' width="50px" class="rounded-full"/>\
+                                                            </div>\
+                                                        </div>\
+                                                        <div>\
+                                                            <div class="small text-gray-500">'+item.date+'</div>\
+                                                            <span>'+item.user_name+' وضع تعليقًا على المنشور <b>'+item.post_title+'<b></span>\
+                                                        </div>\
+                                                    </a>';
+
+                            $('.alert-body').html(resposeNotifications);
+                    });
+                    }
+                });
+            });
+        </script>
+
+
         @yield('script')
     </body>
 </html>
