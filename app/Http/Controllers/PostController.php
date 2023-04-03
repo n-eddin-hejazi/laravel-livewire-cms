@@ -71,7 +71,9 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = $this->post::find($id);
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -79,7 +81,23 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        
+        $data['category_id'] = $request->category_id;
+
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . $file->getClientOriginalName();
+            $file->storeAs('public/images/', $filename);
+        }
+
+        $request->user()->posts()->where('slug', $slug)->update($data + ['image_path'=> $filename ?? 'default.jpg']);
+
+        return redirect(route('post.show', $data['slug']))->with('success', 'successfully');
     }
 
     /**
@@ -104,5 +122,5 @@ class PostController extends Controller
         return view('index', compact('posts', 'title'));
     }
 
-    
+
 }

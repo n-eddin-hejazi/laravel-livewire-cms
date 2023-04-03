@@ -15,13 +15,13 @@
                                 </form>
                             @endcan
 
-                            @can('edit-post', $post)
+                            {{-- @can('edit-post', $post) --}}
                             <form method="GET" action="{{ route('posts.edit', $post->id) }}">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="float-left"><i class="far fa-edit text-success fa-lg ml-3"></i></button>
+                                <button type="submit" class="float-right"><i class="far fa-edit text-success fa-lg ml-3"></i></button>
                             </form>
-                            @endcan
+                            {{-- @endcan --}}
 
                         @endif
                         <img style="float:left" src="{{ $post->user->profile_photo_url }}" width="50px" class="rounded-full"/>
