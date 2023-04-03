@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -27,6 +28,9 @@ Route::post('/reply/store', [CommentController::class, 'replyStore'])->name('rep
 
 Route::post('/notification', [NotificationController::class, 'index'])->name('notification');
 Route::get('/notification',[NotificationController::class, 'allNotification'])->name('all.Notification');
+
+Route::get('user/{id}', [UserController::class, 'getPostsByUser'])->name('profile');
+Route::get('user/{id}/comments', [UserController::class, 'getCommentsByUser'])->name('user_comments');
 
 Route::middleware([
     'auth:sanctum',

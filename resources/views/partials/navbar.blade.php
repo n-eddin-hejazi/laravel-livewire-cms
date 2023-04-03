@@ -83,6 +83,10 @@
                 <li class="nav-item" style="list-style: none">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
+            @else
+                <li class="nav-item" style="list-style: none">
+                    <a class="nav-link" href="{{ route('profile', Auth::user()->id) }}">{{ Auth::user()->name }}</a>
+                </li>
             @endguest
         </ul>
     </div>
